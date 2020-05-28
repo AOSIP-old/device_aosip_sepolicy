@@ -14,9 +14,15 @@ BOARD_PLAT_PRIVATE_SEPOLICY_DIR += \
 
 ifeq ($(TARGET_USES_PREBUILT_VENDOR_SEPOLICY), true)
 BOARD_PLAT_PRIVATE_SEPOLICY_DIR += \
-    device/aosip/sepolicy/qcom/dynamic
+    device/aosip/sepolicy/qcom/dynamic \
+    device/aosip/sepolicy/qcom/system
 else
 BOARD_SEPOLICY_DIRS += \
     device/aosip/sepolicy/qcom/dynamic \
     device/aosip/sepolicy/qcom/vendor
+endif
+
+ifneq ($(filter msm8226 msm8610 msm8974 msm8909 msm8916 msm8952 msm8992 msm8994,$(TARGET_BOARD_PLATFORM)),)
+BOARD_SEPOLICY_DIRS += \
+    device/aosip/sepolicy/qcom/legacy-vendor
 endif
